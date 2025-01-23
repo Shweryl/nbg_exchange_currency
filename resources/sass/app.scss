@@ -1,0 +1,73 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+html,body{
+    padding : 0;
+    margin : 0;
+    box-sizing : border-box;
+    font-family: "Lora", serif;
+    overflow-x: hidden;
+}
+
+.nav-link:hover{
+    font-weight: 600;
+}
+
+// input
+.bg-custom{
+    background-color: #7f4e911a;
+}
+
+// register
+.custom-bg-img{
+    background-image: url('../../public/assets/register.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+// modifying select container
+.select2-container .select2-selection--single {
+    height: 50px !important;   /* Set the height */
+    padding: 10px 12px !important;   /* Inner padding */
+    display: flex !important;
+    align-items: center !important;   /* Center text vertically */
+}
+
+/* Optional: Adjust text positioning if necessary */
+.select2-container .select2-selection__rendered {
+    line-height: 50px !important;    /* Ensure vertical alignment */
+}
+
+/* Adjust the dropdown arrow height */
+.select2-container .select2-selection__arrow {
+    height: 50px !important;
+}
+
+
+.register-link:hover{
+    font-weight: 700;
+    color: $primary !important;
+}
+
+.forget-link:hover{
+    font-weight: 700;
+    color: $primary !important;
+}
+
+.register-text-bg{
+    background-color: #2e133a75;
+}
+
+.register-text-bg a:hover{
+    color: $primary !important;
+    font-weight: 700;
+}
