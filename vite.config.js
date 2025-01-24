@@ -12,8 +12,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    define: {
-        'window.jQuery': 'jquery',
-        'window.$': 'jquery',
-    },
 });

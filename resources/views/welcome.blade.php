@@ -7,7 +7,8 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="">
                             <h4 class="mb-1 fw-bold text-secondary">Exchange Currency</h4>
-                            <small class="text-secondary px-2 border border-1 border-primary-50">Reliable & trustworthy</small>
+                            <small class="text-secondary px-2 border border-1 border-primary-50">Reliable &
+                                trustworthy</small>
                         </div>
 
                         {{-- Bookmark Form --}}
@@ -36,15 +37,20 @@
                                     <p>From</p>
                                     <select id="selectOne" style="width:100% !important;" class=" p-3" name="from"
                                         aria-label="Default select example">
-                                        <option data-image="{{ asset('assets/flags/USD.png') }}" {{$results['from'] == 'USD' ? 'selected' : ''}} value="USD"
-                                            class="mt-3">USD US Dollar</option>
-                                        <option data-image="{{ asset('assets/flags/KHR.png') }}" {{$results['from'] == 'JPY' ? 'selected' : ''}} value="JPY">JPY Japan Yen
+                                        <option data-image="{{ asset('assets/flags/USD.png') }}"
+                                            {{ $results['from'] == 'USD' ? 'selected' : '' }} value="USD" class="mt-3">
+                                            USD US Dollar</option>
+                                        <option data-image="{{ asset('assets/flags/KHR.png') }}"
+                                            {{ $results['from'] == 'JPY' ? 'selected' : '' }} value="JPY">JPY Japan Yen
                                         </option>
-                                        <option data-image="{{ asset('assets/flags/SGD.png') }}" {{$results['from'] == 'SGD' ? 'selected' : ''}} value="SGD">SGD
+                                        <option data-image="{{ asset('assets/flags/SGD.png') }}"
+                                            {{ $results['from'] == 'SGD' ? 'selected' : '' }} value="SGD">SGD
                                             Singapore Dollar</option>
-                                        <option data-image="{{ asset('assets/flags/THB.png') }}" {{$results['from'] == 'THB' ? 'selected' : ''}} value="THB">THB Thai
+                                        <option data-image="{{ asset('assets/flags/THB.png') }}"
+                                            {{ $results['from'] == 'THB' ? 'selected' : '' }} value="THB">THB Thai
                                             Baht</option>
-                                        <option data-image="{{ asset('assets/flags/PHP.png') }}" {{$results['from'] == 'PHP' ? 'selected' : ''}} value="PHP">PHP
+                                        <option data-image="{{ asset('assets/flags/PHP.png') }}"
+                                            {{ $results['from'] == 'PHP' ? 'selected' : '' }} value="PHP">PHP
                                             Philippine Piso</option>
                                     </select>
                                 </div>
@@ -72,23 +78,28 @@
                                     <p>To</p>
                                     <select id="selectTwo" style="width:100% !important;" class="w-100 p-3" name="to"
                                         aria-label="Default select example">
-                                        <option data-image="{{ asset('assets/flags/SGD.png') }}" {{$results['to'] == 'SGD' ? 'selected' : ''}} value="SGD"
-                                            class="">SGD Singapore Dollar</option>
-                                        <option data-image="{{ asset('assets/flags/USD.png') }}" {{$results['to'] == 'USD' ? 'selected' : ''}} value="USD">USD US
+                                        <option data-image="{{ asset('assets/flags/SGD.png') }}"
+                                            {{ $results['to'] == 'SGD' ? 'selected' : '' }} value="SGD" class="">
+                                            SGD Singapore Dollar</option>
+                                        <option data-image="{{ asset('assets/flags/USD.png') }}"
+                                            {{ $results['to'] == 'USD' ? 'selected' : '' }} value="USD">USD US
                                             Dollar</option>
-                                        <option data-image="{{ asset('assets/flags/KHR.png') }}" {{$results['to'] == 'JPY' ? 'selected' : ''}} value="JPY">JPY Japan
+                                        <option data-image="{{ asset('assets/flags/KHR.png') }}"
+                                            {{ $results['to'] == 'JPY' ? 'selected' : '' }} value="JPY">JPY Japan
                                             Yen</option>
-                                        <option data-image="{{ asset('assets/flags/THB.png') }}" {{$results['to'] == 'THB' ? 'selected' : ''}} value="THB">THB Thai
+                                        <option data-image="{{ asset('assets/flags/THB.png') }}"
+                                            {{ $results['to'] == 'THB' ? 'selected' : '' }} value="THB">THB Thai
                                             Baht</option>
-                                        <option data-image="{{ asset('assets/flags/PHP.png') }}" {{$results['to'] == 'PHP' ? 'selected' : ''}} value="PHP">PHP
+                                        <option data-image="{{ asset('assets/flags/PHP.png') }}"
+                                            {{ $results['to'] == 'PHP' ? 'selected' : '' }} value="PHP">PHP
                                             Philippine
                                             Piso</option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-3">
                                     <p type=""
-                                        class="fs-3 border border-0 border-bottom rounded-0 bg-custom px-3 py-2 mb-0"
-                                        >{{ isset($results) ? $results['result'] : '_ _' }}</p>
+                                        class="fs-3 border border-0 border-bottom rounded-0 bg-custom px-3 py-2 mb-0">
+                                        {{ isset($results) ? $results['result'] : '_ _' }}</p>
                                 </div>
                             </div>
                             {{-- End To Currency --}}
@@ -110,7 +121,8 @@
                     <div class="card bg-secondary px-2">
                         <div class="card-body">
                             <span class="fs-4 fw-bold text-warning mb-2 d-block">Average Rate</span>
-                            <span class="fs-6 text-white">1 {{$results['from']}} = {{round($results['rate'], 4)}} {{$results['to']}}</span>
+                            <span class="fs-6 text-white">1 {{ $results['from'] }} = {{ round($results['rate'], 4) }}
+                                {{ $results['to'] }}</span>
                         </div>
                     </div>
                 </div>
@@ -118,26 +130,28 @@
                     <div class="card bg-secondary px-2">
                         <div class="card-body">
                             <span class="fs-4 fw-bold text-warning mb-2 d-block">Reverse Rate</span>
-                            <span class="fs-6 text-white">1 {{$reverse->from}} = {{round($reverse->rate, 4)}} {{$reverse->to}}</span>
+                            <span class="fs-6 text-white">1 {{ $reverse->from }} = {{ round($reverse->rate, 4) }}
+                                {{ $reverse->to }}</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mt-4">
                 <h4 class="text-primary">Available Conversions</h4>
-                @foreach ($restCurrencies as $restCurrency )
-                <div class="col-6 mt-2">
-                    <a href="{{route('currency.change', ['from' => $results['from'], 'amount' => 1, 'to' => $restCurrency])}}">
-                        <div class="card bg-white">
-                            <div class="card-body text-center">
-                                <p class="mb-0 fs-6 fw-semibold text-primary">
-                                    1 {{$results['from']}} to {{$restCurrency}}
-                                    <i class="bi bi-arrow-right-circle ms-4 fw-bold"></i>
-                                </p>
+                @foreach ($restCurrencies as $restCurrency)
+                    <div class="col-6 mt-2">
+                        <a
+                            href="{{ route('currency.change', ['from' => $results['from'], 'amount' => 1, 'to' => $restCurrency]) }}">
+                            <div class="card bg-white">
+                                <div class="card-body text-center">
+                                    <p class="mb-0 fs-6 fw-semibold text-primary">
+                                        1 {{ $results['from'] }} to {{ $restCurrency }}
+                                        <i class="bi bi-arrow-right-circle ms-4 fw-bold"></i>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -148,7 +162,8 @@
         <div class="col-md-6">
             <div class="card d-flex">
                 <div class="card-header bg-secondary py-3">
-                    <h4 class="text-center mb-0 text-warning fw-bold">Covertion from {{$results['from']}} to {{$results['to']}}</h4>
+                    <h4 class="text-center mb-0 text-warning fw-bold">Covertion from {{ $results['from'] }} to
+                        {{ $results['to'] }}</h4>
                 </div>
                 <div class="card-body">
 
@@ -156,35 +171,42 @@
                         <thead>
                             <tr>
                                 <th class="text-center text-primary">
-                                    <img src="{{ asset('assets/flags/'.$results['from'].'.png') }}" width="30" alt="">
-                                    {{$results['from']}}
+                                    <img src="{{ asset('assets/flags/' . $results['from'] . '.png') }}" width="30"
+                                        alt="">
+                                    {{ $results['from'] }}
                                 </th>
                                 <th class="text-center text-primary">
-                                    <img src="{{ asset('assets/flags/'.$results['to'].'.png') }}" width="30" alt="">
-                                    {{$results['to']}}
+                                    <img src="{{ asset('assets/flags/' . $results['to'] . '.png') }}" width="30"
+                                        alt="">
+                                    {{ $results['to'] }}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr >
-                                <td class="text-center text-primary">1 {{$results['from']}}</td>
-                                <td class="text-center text-primary">{{round(1 * $results['rate'], 4)}} {{$results['to']}}</td>
+                            <tr>
+                                <td class="text-center text-primary">1 {{ $results['from'] }}</td>
+                                <td class="text-center text-primary">{{ round(1 * $results['rate'], 4) }}
+                                    {{ $results['to'] }}</td>
                             </tr>
                             <tr>
-                                <td class="text-center text-primary">5 {{$results['from']}}</td>
-                                <td class="text-center text-primary">{{round((5 * $results['rate']), 4)}} {{$results['to']}}</td>
+                                <td class="text-center text-primary">5 {{ $results['from'] }}</td>
+                                <td class="text-center text-primary">{{ round(5 * $results['rate'], 4) }}
+                                    {{ $results['to'] }}</td>
                             </tr>
                             <tr>
-                                <td class="text-center text-primary">10 {{$results['from']}}</td>
-                                <td class="text-center text-primary">{{round((10 * $results['rate']), 4)}} {{$results['to']}}</td>
+                                <td class="text-center text-primary">10 {{ $results['from'] }}</td>
+                                <td class="text-center text-primary">{{ round(10 * $results['rate'], 4) }}
+                                    {{ $results['to'] }}</td>
                             </tr>
                             <tr>
-                                <td class="text-center text-primary">100 {{$results['from']}}</td>
-                                <td class="text-center text-primary">{{round((100 * $results['rate']), 4)}} {{$results['to']}}</td>
+                                <td class="text-center text-primary">100 {{ $results['from'] }}</td>
+                                <td class="text-center text-primary">{{ round(100 * $results['rate'], 4) }}
+                                    {{ $results['to'] }}</td>
                             </tr>
                             <tr>
-                                <td class="text-center text-primary">1000 {{$results['from']}}</td>
-                                <td class="text-center text-primary">{{round((1000 * $results['rate']), 4)}} {{$results['to']}}</td>
+                                <td class="text-center text-primary">1000 {{ $results['from'] }}</td>
+                                <td class="text-center text-primary">{{ round(1000 * $results['rate'], 4) }}
+                                    {{ $results['to'] }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -194,7 +216,8 @@
         <div class="col-md-6 mt-lg-0 mt-3">
             <div class="card d-flex">
                 <div class="card-header bg-secondary py-3">
-                    <h4 class="text-center mb-0 text-warning fw-bold">Covertion from {{$reverse['from']}} to {{$reverse['to']}}</h4>
+                    <h4 class="text-center mb-0 text-warning fw-bold">Covertion from {{ $reverse['from'] }} to
+                        {{ $reverse['to'] }}</h4>
                 </div>
                 <div class="card-body">
 
@@ -202,35 +225,42 @@
                         <thead>
                             <tr>
                                 <th class="text-center text-primary">
-                                    <img src="{{ asset('assets/flags/'.$reverse->from.'.png') }}" width="30" alt="">
-                                    {{$reverse->from}}
+                                    <img src="{{ asset('assets/flags/' . $reverse->from . '.png') }}" width="30"
+                                        alt="">
+                                    {{ $reverse->from }}
                                 </th>
                                 <th class="text-center text-primary">
-                                    <img src="{{ asset('assets/flags/'.$reverse->to.'.png') }}" width="30" alt="">
-                                    {{$reverse->to}}
+                                    <img src="{{ asset('assets/flags/' . $reverse->to . '.png') }}" width="30"
+                                        alt="">
+                                    {{ $reverse->to }}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr >
-                                <td class="text-center text-primary">1 {{$reverse->from}}</td>
-                                <td class="text-center text-primary">{{round(1 * $reverse->rate, 4)}} {{$reverse->to}}</td>
+                            <tr>
+                                <td class="text-center text-primary">1 {{ $reverse->from }}</td>
+                                <td class="text-center text-primary">{{ round(1 * $reverse->rate, 4) }}
+                                    {{ $reverse->to }}</td>
                             </tr>
                             <tr>
-                                <td class="text-center text-primary">5 {{$reverse->from}}</td>
-                                <td class="text-center text-primary">{{round((5 * $reverse->rate), 4)}} {{$reverse->to}}</td>
+                                <td class="text-center text-primary">5 {{ $reverse->from }}</td>
+                                <td class="text-center text-primary">{{ round(5 * $reverse->rate, 4) }}
+                                    {{ $reverse->to }}</td>
                             </tr>
                             <tr>
-                                <td class="text-center text-primary">10 {{$reverse->from}}</td>
-                                <td class="text-center text-primary">{{round((10 * $reverse->rate), 4)}} {{$reverse->to}}</td>
+                                <td class="text-center text-primary">10 {{ $reverse->from }}</td>
+                                <td class="text-center text-primary">{{ round(10 * $reverse->rate, 4) }}
+                                    {{ $reverse->to }}</td>
                             </tr>
                             <tr>
-                                <td class="text-center text-primary">100 {{$reverse->from}}</td>
-                                <td class="text-center text-primary">{{round((100 * $reverse->rate), 4)}} {{$reverse->to}}</td>
+                                <td class="text-center text-primary">100 {{ $reverse->from }}</td>
+                                <td class="text-center text-primary">{{ round(100 * $reverse->rate, 4) }}
+                                    {{ $reverse->to }}</td>
                             </tr>
                             <tr>
-                                <td class="text-center text-primary">1000 {{$reverse->from}}</td>
-                                <td class="text-center text-primary">{{round((1000 * $reverse->rate), 4)}} {{$reverse->to}}</td>
+                                <td class="text-center text-primary">1000 {{ $reverse->from }}</td>
+                                <td class="text-center text-primary">{{ round(1000 * $reverse->rate, 4) }}
+                                    {{ $reverse->to }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -239,6 +269,14 @@
         </div>
     </div>
 @endsection
+
+@if(session('bookmark'))
+    @push('js')
+    <script type="module">
+        showWarning('warning', "{{session('bookmark')}}")
+    </script>
+    @endpush
+@endif
 @push('js')
     {{-- swapping select --}}
     <script>

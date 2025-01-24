@@ -16,7 +16,7 @@
                 <div class="card bg-white py-2 px-4">
 
                     <div class="card-body">
-                        <form method="POST" onsubmit="disableLogin(event)" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('login') }}">
                             @csrf
 
                             <div class="form-group">
@@ -81,12 +81,10 @@
 @endsection
 
 @push('js')
-    <script>
-        function disableLogin(event){
-            let loginBtn = document.getElementById('login-btn')
-            let spinner = document.getElementById('spinner')
-            loginBtn.disabled = true
-            spinner.style.display = "inline-block"
-        }
+    <script type="module">
+        document.addEventListener('submit', function (event) {
+            isLoading(event, 'login-btn');
+        });
+
     </script>
 @endpush

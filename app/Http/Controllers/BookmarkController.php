@@ -21,7 +21,7 @@ class BookmarkController extends Controller
             return redirect()->route('bookmark.list')->with('message', 'New Bookmark is added.');
         };
         // else return back with message
-        return back()->with('message', 'This is already bookmarked.');
+        return back()->with('bookmark', 'This coversion already exists.');
     }
 
     public function bookmark_list(){
@@ -30,7 +30,7 @@ class BookmarkController extends Controller
                                 $q->where('from',request('from'))
                                 ->where('to', request('to'));
                             })
-                            ->where('user_id', Auth::user()->id)->get();
+                            ->where('user_id', Auth::user()->id)->paginate(8);
 
         return view('bookmark-list', compact('bookmarks'));
     }

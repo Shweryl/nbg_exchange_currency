@@ -15,6 +15,7 @@
 
     <!-- Styles / Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
 </head>
 
 <body>
@@ -27,6 +28,8 @@
     </div>
 
     @stack('js')
+    
+
 </body>
 
 </html>
