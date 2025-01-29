@@ -16,7 +16,7 @@ class ExchangeRateSeeder extends Seeder
     {
         $apiKey = config('services.freecurrency.api_key');
         $url =  "https://api.freecurrencyapi.com/v1/latest";
-        $currencies = ['PHP','SGD','THB','USD','JPY'];
+        $currencies = ['MYR','PHP','SGD','THB','USD'];
 
         $rates = [];
 

@@ -21,6 +21,11 @@ html,body{
     font-weight: 600;
 }
 
+.nav-link.active{
+    font-weight: 600 !important;
+    color: $primary !important;
+}
+
 // input
 .bg-custom{
     background-color: #7f4e911a;

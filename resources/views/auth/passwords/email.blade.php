@@ -1,4 +1,4 @@
-@extends('main-theme')
+@extends('layouts.main-theme')
 
 @section('content')
 <div class="container">
@@ -19,7 +19,7 @@
                         <img class="w-75" src="{{asset('assets/forgot_password.png')}}" alt="">
                     </div>
 
-                    <form method="POST" onsubmit="disableContinueBtn(event)" class="w-100 px-2 px-lg-5" action="{{ route('password.email') }}">
+                    <form method="POST" class="w-100 px-2 px-lg-5" action="{{ route('password.email') }}">
                         @csrf
 
                         <div class="form-group px-lg-5 mb-3 text-center">
@@ -51,12 +51,10 @@
 @endsection
 
 @push('js')
-    <script>
-        function disableContinueBtn(event){
-            let continueBtn = document.getElementById('continue-btn')
-            let spinner = document.getElementById('spinner')
-            continueBtn.disabled = true
-            spinner.style.display = "inline-block"
-        }
+    <script type="module">
+        document.addEventListener('submit', function (event) {
+            isLoading(event, 'continue-btn');
+        });
+
     </script>
 @endpush

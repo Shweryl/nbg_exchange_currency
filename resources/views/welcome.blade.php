@@ -1,4 +1,4 @@
-@extends('main-theme')
+@extends('layouts.main-theme')
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-7">
@@ -11,14 +11,14 @@
                                 trustworthy</small>
                         </div>
 
-                        {{-- Bookmark Form --}}
-                        <form class="d-inline-block" action="{{ route('bookmark') }}" method="post">
+                        {{-- Bookmark save Form --}}
+                        <form class="d-inline-block" id="save-bookmark" action="{{ route('bookmark') }}" method="post">
                             @csrf
-                            <input type="hidden" name="from" value="{{ isset($results) ? $results['from'] : 'USD' }}">
-                            <input type="hidden" name="to" value="{{ isset($results) ? $results['to'] : 'SGD' }}">
-                            <input type="hidden" name="amount" value="{{ isset($results) ? $results['amount'] : '1' }}">
-                            <input type="hidden" name="rate" value="{{ isset($results) ? $results['rate'] : '1' }}">
-                            <input type="hidden" name="result" value="{{ isset($results) ? $results['result'] : '1' }}">
+                            <input type="hidden" name="from" value="{{ $results['from'] }}">
+                            <input type="hidden" name="to" value="{{ $results['to'] }}">
+                            <input type="hidden" name="amount" value="{{ $results['amount'] }}">
+                            <input type="hidden" name="rate" value="{{ $results['rate'] }}">
+                            <input type="hidden" name="result" value="{{ $results['result'] }}">
 
                             <button type="submit" class="btn btn-outline-primary">
                                 <i class="bi bi-bookmark-star-fill"></i>
@@ -28,10 +28,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    {{-- Convert Currency Form --}}
+                    {{-- Currency convertion Form --}}
                     <form action="{{ route('currency.change') }}" method="GET">
                         <div class="row justify-content-center align-items-center">
-                            {{-- From currency  select --}}
+                            {{-- From currency select --}}
                             <div class="col-12 col-lg-5 d-flex flex-column">
                                 <div class="w-100">
                                     <p>From</p>
@@ -40,8 +40,9 @@
                                         <option data-image="{{ asset('assets/flags/USD.png') }}"
                                             {{ $results['from'] == 'USD' ? 'selected' : '' }} value="USD" class="mt-3">
                                             USD US Dollar</option>
-                                        <option data-image="{{ asset('assets/flags/KHR.png') }}"
-                                            {{ $results['from'] == 'JPY' ? 'selected' : '' }} value="JPY">JPY Japan Yen
+                                        <option data-image="{{ asset('assets/flags/MYR.png') }}"
+                                            {{ $results['from'] == 'MYR' ? 'selected' : '' }} value="MYR">MYR Malaysian
+                                            Ringgit
                                         </option>
                                         <option data-image="{{ asset('assets/flags/SGD.png') }}"
                                             {{ $results['from'] == 'SGD' ? 'selected' : '' }} value="SGD">SGD
@@ -57,10 +58,9 @@
                                 <div class="form-group mt-3">
                                     <input type="number"
                                         class="fs-3 form-control border border-0 border-bottom rounded-0 bg-custom px-3 py-2"
-                                        name="amount" value="{{ isset($results) ? $results['amount'] : '1' }}">
+                                        name="amount" value="{{ $results['amount'] }}">
                                 </div>
                             </div>
-                            {{-- End From currency --}}
 
                             {{-- swap button for large screen --}}
                             <div class="col-12 col-lg-1 text-center switch-btn d-none d-lg-block">
@@ -84,9 +84,10 @@
                                         <option data-image="{{ asset('assets/flags/USD.png') }}"
                                             {{ $results['to'] == 'USD' ? 'selected' : '' }} value="USD">USD US
                                             Dollar</option>
-                                        <option data-image="{{ asset('assets/flags/KHR.png') }}"
-                                            {{ $results['to'] == 'JPY' ? 'selected' : '' }} value="JPY">JPY Japan
-                                            Yen</option>
+                                        <option data-image="{{ asset('assets/flags/MYR.png') }}"
+                                            {{ $results['to'] == 'MYR' ? 'selected' : '' }} value="MYR">MYR Malaysian
+                                            Ringgit
+                                            </option>
                                         <option data-image="{{ asset('assets/flags/THB.png') }}"
                                             {{ $results['to'] == 'THB' ? 'selected' : '' }} value="THB">THB Thai
                                             Baht</option>
@@ -99,10 +100,9 @@
                                 <div class="form-group mt-3">
                                     <p type=""
                                         class="fs-3 border border-0 border-bottom rounded-0 bg-custom px-3 py-2 mb-0">
-                                        {{ isset($results) ? $results['result'] : '_ _' }}</p>
+                                        {{ $results['result']}}</p>
                                 </div>
                             </div>
-                            {{-- End To Currency --}}
                         </div>
                         <div class="row mt-3">
                             <div class="text-center ">
@@ -157,7 +157,7 @@
         </div>
     </div>
 
-    {{-- Conversion tables --}}
+    {{-- Convertion tables --}}
     <div class="row my-5">
         <div class="col-md-6">
             <div class="card d-flex">
@@ -165,6 +165,7 @@
                     <h4 class="text-center mb-0 text-warning fw-bold">Covertion from {{ $results['from'] }} to
                         {{ $results['to'] }}</h4>
                 </div>
+                {{-- Useful convertions for From to rate --}}
                 <div class="card-body">
 
                     <table class="table bg-white">
@@ -185,27 +186,42 @@
                         <tbody>
                             <tr>
                                 <td class="text-center text-primary">1 {{ $results['from'] }}</td>
-                                <td class="text-center text-primary">{{ round(1 * $results['rate'], 4) }}
+                                <td class="text-center text-primary">{{ round(1 * $results['rate'], 2) }}
                                     {{ $results['to'] }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center text-primary">5 {{ $results['from'] }}</td>
-                                <td class="text-center text-primary">{{ round(5 * $results['rate'], 4) }}
+                                <td class="text-center text-primary">{{ round(5 * $results['rate'], 2) }}
                                     {{ $results['to'] }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center text-primary">10 {{ $results['from'] }}</td>
-                                <td class="text-center text-primary">{{ round(10 * $results['rate'], 4) }}
+                                <td class="text-center text-primary">{{ round(10 * $results['rate'], 2) }}
                                     {{ $results['to'] }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center text-primary">100 {{ $results['from'] }}</td>
-                                <td class="text-center text-primary">{{ round(100 * $results['rate'], 4) }}
+                                <td class="text-center text-primary">{{ round(100 * $results['rate'], 2) }}
                                     {{ $results['to'] }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center text-primary">1000 {{ $results['from'] }}</td>
-                                <td class="text-center text-primary">{{ round(1000 * $results['rate'], 4) }}
+                                <td class="text-center text-primary">{{ round(1000 * $results['rate'], 2) }}
+                                    {{ $results['to'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-primary">2500 {{ $results['from'] }}</td>
+                                <td class="text-center text-primary">{{ round(2500 * $results['rate'], 2) }}
+                                    {{ $results['to'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-primary">5000 {{ $results['from'] }}</td>
+                                <td class="text-center text-primary">{{ round(5000 * $results['rate'], 2) }}
+                                    {{ $results['to'] }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-primary">10000 {{ $results['from'] }}</td>
+                                <td class="text-center text-primary">{{ round(10000 * $results['rate'], 2) }}
                                     {{ $results['to'] }}</td>
                             </tr>
                         </tbody>
@@ -219,6 +235,8 @@
                     <h4 class="text-center mb-0 text-warning fw-bold">Covertion from {{ $reverse['from'] }} to
                         {{ $reverse['to'] }}</h4>
                 </div>
+
+                {{-- Useful convertions for From to rate --}}
                 <div class="card-body">
 
                     <table class="table bg-white">
@@ -239,27 +257,42 @@
                         <tbody>
                             <tr>
                                 <td class="text-center text-primary">1 {{ $reverse->from }}</td>
-                                <td class="text-center text-primary">{{ round(1 * $reverse->rate, 4) }}
+                                <td class="text-center text-primary">{{ round(1 * $reverse->rate, 2) }}
                                     {{ $reverse->to }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center text-primary">5 {{ $reverse->from }}</td>
-                                <td class="text-center text-primary">{{ round(5 * $reverse->rate, 4) }}
+                                <td class="text-center text-primary">{{ round(5 * $reverse->rate, 2) }}
                                     {{ $reverse->to }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center text-primary">10 {{ $reverse->from }}</td>
-                                <td class="text-center text-primary">{{ round(10 * $reverse->rate, 4) }}
+                                <td class="text-center text-primary">{{ round(10 * $reverse->rate, 2) }}
                                     {{ $reverse->to }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center text-primary">100 {{ $reverse->from }}</td>
-                                <td class="text-center text-primary">{{ round(100 * $reverse->rate, 4) }}
+                                <td class="text-center text-primary">{{ round(100 * $reverse->rate, 2) }}
                                     {{ $reverse->to }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center text-primary">1000 {{ $reverse->from }}</td>
-                                <td class="text-center text-primary">{{ round(1000 * $reverse->rate, 4) }}
+                                <td class="text-center text-primary">{{ round(1000 * $reverse->rate, 2) }}
+                                    {{ $reverse->to }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-primary">2500 {{ $reverse->from }}</td>
+                                <td class="text-center text-primary">{{ round(2500 * $reverse->rate, 2) }}
+                                    {{ $reverse->to }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-primary">5000 {{ $reverse->from }}</td>
+                                <td class="text-center text-primary">{{ round(5000 * $reverse->rate, 2) }}
+                                    {{ $reverse->to }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center text-primary">10000 {{ $reverse->from }}</td>
+                                <td class="text-center text-primary">{{ round(10000 * $reverse->rate, 2) }}
                                     {{ $reverse->to }}</td>
                             </tr>
                         </tbody>
@@ -268,18 +301,34 @@
             </div>
         </div>
     </div>
+
 @endsection
 
-@if(session('bookmark'))
+
+{{-- Warning for existed bookmark --}}
+@if (session('bookmark'))
     @push('js')
-    <script type="module">
-        showWarning('warning', "{{session('bookmark')}}")
-    </script>
+        <script type="module">
+            showWarning('warning', "{{ session('bookmark') }}")
+        </script>
     @endpush
 @endif
+
+{{-- Confirm box for saving bookmark --}}
+@push('js')
+    <script type="module">
+        let saveBookmark = document.getElementById('save-bookmark')
+        saveBookmark.addEventListener('submit', function(event) {
+            event.preventDefault()
+            showConfirmBox(saveBookmark, 'Want to bookmark this?')
+        })
+    </script>
+@endpush
+
+{{-- Javascript for swapping currency feature && select2 integration for select dropdown --}}
 @push('js')
     {{-- swapping select --}}
-    <script>
+    <script type="module">
         let switchBtn = document.querySelectorAll('.switch-btn');
         let selectOne = document.getElementById('selectOne');
         let selectTwo = document.getElementById('selectTwo');
@@ -295,18 +344,8 @@
                 $('#selectTwo').trigger('change');
             });
         });
-
-        // switchBtn.addEventListener('click', function() {
-        //     let valueOne = selectOne.value;
-        //     let valueTwo = selectTwo.value;
-        //     selectOne.value = valueTwo;
-        //     selectTwo.value = valueOne;
-
-        //     $('#selectOne').trigger('change');
-        //     $('#selectTwo').trigger('change');
-        // })
     </script>
-    <script>
+    <script type="module">
         $(document).ready(function() {
             function formatOption(option) {
                 if (!option.id) return option.text;
@@ -330,41 +369,6 @@
     </script>
 @endpush
 
-@push('js')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const ctx = document.getElementById('myChart');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                    datasets: [{
-                        label: 'Currency Rate',
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        fill: true,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1,
 
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            grid: {
-                                display: false, // Disable x-axis grid lines
-                            }
-                        },
-                        y: {
-                            grid: {
-                                display: false, // Disable y-axis grid lines
-                            }
-                        }
-                    },
-                }
 
-            });
-        })
-    </script>
-@endpush
+

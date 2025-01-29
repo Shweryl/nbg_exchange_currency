@@ -1,4 +1,4 @@
-@extends('main-theme')
+@extends('layouts.main-theme')
 
 @section('content')
 <div class="card bg-white border py-4 border-0 shadow">

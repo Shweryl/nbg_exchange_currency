@@ -1,4 +1,4 @@
-@extends('main-theme')
+@extends('layouts.main-theme')
 
 @section('content')
 <div class="card border border-0">
@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="col-lg-4 p-5 bg-white border border-black-50 shadow">
-                <form method="POST" onsubmit="disableRegister(event)" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="form-group">
                         <label for="email" class="text-primary">Your Name</label>
@@ -89,12 +89,10 @@
 @endsection
 
 @push('js')
-    <script>
-        function disableRegister(event){
-            let registerBtn = document.getElementById('register-btn')
-            let spinner = document.getElementById('spinner')
-            registerBtn.disabled = true 
-            spinner.style.display = "inline-block"
-        }
+    <script type="module">
+        document.addEventListener('submit', function (event) {
+            isLoading(event, 'register-btn');
+        });
+
     </script>
 @endpush

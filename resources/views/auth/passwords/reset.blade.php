@@ -1,4 +1,4 @@
-@extends('main-theme')
+@extends('layouts.main-theme')
 
 @section('content')
     <div class="container">
@@ -68,12 +68,10 @@
 @endsection
 
 @push('js')
-    <script>
-        function disableReset(event){
-            let resetBtn = document.getElementById('reset-btn')
-            let spinner = document.getElementById('spinner')
-            resetBtn.disabled = true
-            spinner.style.display = "inline-block"
-        }
+    <script type="module">
+        document.addEventListener('submit', function (event) {
+            isLoading(event, 'reset-btn');
+        });
+
     </script>
 @endpush

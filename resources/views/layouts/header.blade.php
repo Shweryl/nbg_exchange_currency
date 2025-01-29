@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-secondary py-2">
+<nav class="navbar navbar-expand-lg bg-secondary py-2 fixed-top">
     <div class="container">
-        <a class="navbar-brand fw-bold text-warning" href="{{ route('welcome') }}">VE_EXCH</a>
+        <a class="navbar-brand fw-bold text-warning" href="{{ route('welcome') }}">VE_EX</a>
         <button class="navbar-toggler bg-primary" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -8,6 +8,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white my-2 me-lg-3 {{request()->fullUrl() == route('history.rate') ? 'active' : ''}}" href="{{ route('history.rate') }}">
+
+                        History Rates
+                    </a>
+                </li>
                 @guest
                     <li class="nav-item  me-md-2">
                         <a class="nav-link text-white" href="{{ route('login') }}">
@@ -24,9 +30,10 @@
                         </a>
                     </li>
                 @endguest
+
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link text-white my-2 me-lg-3" href="{{ route('bookmark.list') }}">
+                        <a class="nav-link text-white my-2 me-lg-3 {{request()->fullUrl() == route('bookmark.list') ? 'active' : ''}}" href="{{ route('bookmark.list') }}">
 
                             Bookmarks
                             <i class="bi bi-bookmark-star-fill"></i>

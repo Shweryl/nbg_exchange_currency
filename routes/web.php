@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -17,6 +18,7 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/exchange', [CurrencyController::class, 'exchange'])->name('currency.change');
 Route::get('/', [CurrencyController::class, 'welcome'])->name('welcome');
+Route::get('/history', [HistoryController::class, 'history_rates'])->name('history.rate');
 
 Route::middleware('auth')->group(function(){
     Route::post('/bookmark', [BookmarkController::class, 'store'])->name('bookmark');

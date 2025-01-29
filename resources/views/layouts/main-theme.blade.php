@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Exchange</title>
+    <title>VE_EX</title>
 
-    {{-- Select 2 Cdn --}}
+    {{-- Select 2 cdn --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {{-- select 2 cdn --}}
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -20,15 +20,15 @@
 
 <body>
     <div class="container-fluid px-0">
-        @include('header')
+        @include('layouts.header')
 
-        <main class="container mt-5">
+        <main class="container mt-5 pt-5">
             @yield('content')
         </main>
     </div>
 
     @stack('js')
-    
+
 
 </body>
 

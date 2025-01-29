@@ -2,86 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidateConvertRequest;
 use App\Models\ExchangeRate;
+use App\Models\HistoryRate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class CurrencyController extends Controller
 {
-    // public function exchange(Request $request){
 
-    //     $response = $this->getCurrencyRate($request->from, $request->to);
+    public function exchange(ValidateConvertRequest $request){
 
-    //     if(isset($response['data'])){
-
-    //         $results = [
-    //             'from' => $request->from,
-    //             'to' => $request->to,
-    //             'amount' => $request->amount,
-    //             'rate' => $response['data'][$request->to],
-    //             'result' => $response['data'][$request->to] * $request->amount
-    //         ];
-
-    //         return view('welcome', compact('results'));
-    //     }
-
-
-
-    //     return back()->with('error', 'Currecy not found');
-    // }
-
-    // public function getCurrencyRate($base= 'USD', $target = 'SGD'){
-    //     $url = 'https://api.freecurrencyapi.com/v1/latest';
-    //     $apiKey = config('services.freecurrency.api_key');
-
-    //     $response = Http::get($url, [
-    //         'apikey' => $apiKey,
-    //         'base_currency' => $base,
-    //         'currencies' => $target,
-    //     ]);
-
-
-    //     if ($response->successful()) {
-    //         return $response->json();
-    //     };
-
-    //     return ['error' => 'Unable to fetch exchange rates.'];
-
-    // }
-
-    // public function welcome(){
-    //     $response = $this->getCurrencyRate();
-
-    //     if(isset($response['data'])){
-
-    //         $results = [
-    //             'from' => 'USD',
-    //             'to' => 'SGD',
-    //             'amount' => 1,
-    //             'rate' => $response['data']['SGD'],
-    //             'result' => $response['data']['SGD'],
-    //         ];
-
-    //         return view('welcome', compact('results'));
-    //     }
-
-    //     return view('welcome', ['error' => 'Server Error']);
-    // }
-
-
-    public function exchange(Request $request){
+        $amount = $request->amount ?? 1;
 
         $currency = $this->fetchCurrency($request->from, $request->to);
 
+        // return $currency;
+
         $reverse = $this->fetchCurrency($request->to, $request->from);
 
-        $results = [
-            'from' => $currency->from,
-            'to' => $currency->to,
-            'rate' => $currency->rate,
-            'amount' => $request->amount,
-            'result' => round($request->amount * $currency->rate, 4)
-        ];
+        $results = $this->returnResults($currency->from, $currency->to, $currency->rate, $amount);
+        // $results = [
+        //     'from' => $currency->from,
+        //     'to' => $currency->to,
+        //     'rate' => $currency->rate,
+        //     'amount' => $amount,
+        //     'result' => round($amount * $currency->rate, 2)
+        // ];
 
         $restCurrencies = $this->restCurrencies($request->from);
 
@@ -95,13 +42,15 @@ class CurrencyController extends Controller
 
         $reverse = $this->fetchCurrency('SGD', 'USD');
 
-        $results = [
-            'from' => $currency->from,
-            'to' => $currency->to,
-            'rate' => $currency->rate,
-            'amount' => 1,
-            'result' => round($currency->rate, 4)
-        ];
+        $results = $this->returnResults($currency->from, $currency->to, $currency->rate, 1);
+
+        // $results = [
+        //     'from' => $currency->from,
+        //     'to' => $currency->to,
+        //     'rate' => $currency->rate,
+        //     'amount' => 1,
+        //     'result' => round($currency->rate, 2)
+        // ];
 
         $restCurrencies = $this->restCurrencies('USD');
 
@@ -119,13 +68,30 @@ class CurrencyController extends Controller
 
 
     public function restCurrencies($from){
-        $currencies = ['USD', 'PHP', 'JPY','SGD', 'THB'];
+        $currencies = ['USD', 'PHP', 'MYR','SGD', 'THB'];
 
         $restCurrencies = array_filter($currencies, function($currency) use($from){
             return $currency != $from;
         });
 
         return $restCurrencies;
+    }
+
+    public function returnResults($from, $to, $rate, $amount){
+        $results = [
+            'from' => $from,
+            'to' => $to,
+            'rate' => $rate,
+            'amount' => $amount,
+            'result' => round($this->calculateRate($amount, $rate), 2)
+        ];
+
+        return $results;
+
+    }
+
+    public function calculateRate($amount, $rate){
+        return $amount * $rate;
     }
 
 }
