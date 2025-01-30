@@ -31,6 +31,7 @@ class BookmarkController extends Controller
     public function bookmark_list(Request $request){
         $validatedFilter = [];
 
+        // for when filter data is included.
         if($request->has(['from', 'to'])){
             $validatedFilter = $this->validate_filter_input($request);
         }

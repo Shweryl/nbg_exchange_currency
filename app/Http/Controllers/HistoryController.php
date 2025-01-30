@@ -15,15 +15,9 @@ class HistoryController extends Controller
         $thb = HistoryRate::where('to','THB')->orderBy('date','asc')->get();
 
         $dates = $sgd->pluck('date');
+        
 
-        // $rates = HistoryRate::whereIn('to', ['SGD', 'MYR', 'PHP', 'THB'])
-        //     ->orderBy('date', 'asc')
-        //     ->get()
-        //     ->groupBy('date');
-
-        // return $rates;
-
-
+        // data for table data
         $historyRates = [];
         foreach ($dates as $date) {
             $historyRates[] = [
@@ -35,6 +29,8 @@ class HistoryController extends Controller
             ];
         }
 
+
+        // data for table dataset
         $sgd = $sgd->pluck('rate');
         $myr = $myr->pluck('rate');
         $php = $php->pluck('rate');

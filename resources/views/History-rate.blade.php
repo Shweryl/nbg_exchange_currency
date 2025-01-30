@@ -7,7 +7,7 @@
             <h6 class="mb-2 text-center">SGD Exchange Rates Over Past Week</h6>
             <canvas id="myChart1"></canvas>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 mt-lg-0 mt-5">
             <h6 class="mb-2 text-center">THB Exchange Rates Over Past Week</h6>
             <canvas id="myChart2"></canvas>
         </div>

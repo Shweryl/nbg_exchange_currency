@@ -22,13 +22,6 @@ class CurrencyController extends Controller
         $reverse = $this->fetchCurrency($request->to, $request->from);
 
         $results = $this->returnResults($currency->from, $currency->to, $currency->rate, $amount);
-        // $results = [
-        //     'from' => $currency->from,
-        //     'to' => $currency->to,
-        //     'rate' => $currency->rate,
-        //     'amount' => $amount,
-        //     'result' => round($amount * $currency->rate, 2)
-        // ];
 
         $restCurrencies = $this->restCurrencies($request->from);
 
@@ -43,14 +36,6 @@ class CurrencyController extends Controller
         $reverse = $this->fetchCurrency('SGD', 'USD');
 
         $results = $this->returnResults($currency->from, $currency->to, $currency->rate, 1);
-
-        // $results = [
-        //     'from' => $currency->from,
-        //     'to' => $currency->to,
-        //     'rate' => $currency->rate,
-        //     'amount' => 1,
-        //     'result' => round($currency->rate, 2)
-        // ];
 
         $restCurrencies = $this->restCurrencies('USD');
 

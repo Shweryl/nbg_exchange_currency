@@ -12,12 +12,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-// Route::post('/login', [LoginController::class, 'login'])->name('login');
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Currency Convertion route
 Route::get('/exchange', [CurrencyController::class, 'exchange'])->name('currency.change');
+
+// landing page (welcome) route
 Route::get('/', [CurrencyController::class, 'welcome'])->name('welcome');
+
+// historical data for time being
 Route::get('/history', [HistoryController::class, 'history_rates'])->name('history.rate');
 
 Route::middleware('auth')->group(function(){

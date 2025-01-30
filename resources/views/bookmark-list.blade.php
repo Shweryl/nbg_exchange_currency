@@ -30,7 +30,7 @@
                                         id="">
                                         <option value="SGD" {{ !is_null(request('to')) ? (request('to') == 'SGD' ? 'selected' : '') : '' }}>SGD</option>
                                         <option value="USD" {{ !is_null(request('to')) ? (request('to') == 'USD' ? 'selected' : '') : '' }}>USD</option>
-                                        <option value="MYR" {{ !is_null(request('to')) ? (request('to') == 'JPY' ? 'selected' : '') : '' }}>MYR</option>
+                                        <option value="MYR" {{ !is_null(request('to')) ? (request('to') == 'MYR' ? 'selected' : '') : '' }}>MYR</option>
                                         <option value="PHP" {{ !is_null(request('to')) ? (request('to') == 'PHP' ? 'selected' : '') : '' }}>PHP</option>
                                         <option value="THB" {{ !is_null(request('to')) ? (request('to') == 'THB' ? 'selected' : '') : '' }}>THB</option>
                                     </select>

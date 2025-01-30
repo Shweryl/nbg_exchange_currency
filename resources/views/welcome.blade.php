@@ -56,7 +56,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input type="number"
+                                    <input type="number" min="0.00" max="1000000" step="any"
                                         class="fs-3 form-control border border-0 border-bottom rounded-0 bg-custom px-3 py-2"
                                         name="amount" value="{{ $results['amount'] }}">
                                 </div>
