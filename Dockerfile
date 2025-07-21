@@ -32,10 +32,8 @@ RUN php artisan key:generate
 
 # Create and migrate SQLite database (if used)
 RUN mkdir -p /var/www/database \
-    && touch /var/www/database/database.sqlite \
-    && php artisan migrate --force \
-    && php artisan db:seed --class=ExchangeRateSeeder \
-    && php artisan db:seed --class=HistoryRateSeeder
+    && touch /var/www/database/database.sqlite
 
 EXPOSE 8000
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=8000
+
