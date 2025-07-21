@@ -3,13 +3,16 @@ FROM node:20 AS node-builder
 
 WORKDIR /app
 
-# Add tools needed for node-sass and other packages
+# Install build tools
 RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
 
+# Copy only package files first for caching
 COPY package*.json ./
 RUN npm install
 
+# Now copy the rest and build
 COPY . .
+ENV NODE_ENV=production
 RUN npm run build
 
 
@@ -27,20 +30,22 @@ RUN apt-get update && apt-get install -y \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy Laravel source code
+# Copy Laravel application
 COPY --chown=www-data:www-data . /var/www
 
 # Copy built frontend assets
 COPY --from=node-builder /app/public/build /var/www/public/build
+COPY --from=node-builder /app/public/mix-manifest.json /var/www/public/mix-manifest.json
+COPY --from=node-builder /app/public/hot /var/www/public/hot # optional
 
 # Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Setup .env and app key
+# Set permissions and generate env key
 COPY .env.example .env
 RUN php artisan key:generate
 
-# Setup SQLite DB (if used)
+# Create SQLite db
 RUN mkdir -p database && touch database/database.sqlite
 
 EXPOSE 8000
