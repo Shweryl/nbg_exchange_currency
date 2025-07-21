@@ -1,5 +1,5 @@
 ### Step 1: Node.js for frontend (Vite)
-FROM node:18 AS node-builder
+FROM node:20 AS node-builder
 
 WORKDIR /app
 
